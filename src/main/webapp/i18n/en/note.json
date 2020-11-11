@@ -1,0 +1,27 @@
+{
+  "noteyboiApp": {
+    "note": {
+      "home": {
+        "title": "Notes",
+        "createLabel": "Create a new Note",
+        "createOrEditLabel": "Create or edit a Note",
+        "notFound": "No Notes found"
+      },
+      "created": "A new Note is created with identifier {{ param }}",
+      "updated": "A Note is updated with identifier {{ param }}",
+      "deleted": "A Note is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Note {{ id }}?"
+      },
+      "detail": {
+        "title": "Note"
+      },
+      "content": "Content",
+      "title": "Title",
+      "xpos": "Xpos",
+      "ypos": "Ypos",
+      "assignedTo": "Assigned To",
+      "tag": "Tag"
+    }
+  }
+}

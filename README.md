@@ -1,4 +1,4 @@
-# noteynotenote
+# noteyboi
 
 This application was generated using JHipster 6.10.5, you can find documentation and help at [https://www.jhipster.tech/documentation-archive/v6.10.5](https://www.jhipster.tech/documentation-archive/v6.10.5).
 
@@ -18,33 +18,13 @@ npm install
 
 We use npm scripts and [Webpack][] as our build system.
 
-If you are using redis as a cache, you will have to launch a cache server.
-To start your cache server, run:
-
-```
-docker-compose -f src/main/docker/redis.yml up -d
-```
-
-The cache can also be turned off by adding to the application yaml:
-
-```
-spring:
-    cache:
-        type: none
-```
-
-See [here](https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-caching.html#boot-features-caching-provider-none) for details.
-
-**WARNING**: If you using second level hibernate cache and disabling the spring cache, you have to disable the second level hibernate cache as well since they are using
-the same CacheManager.
-
 Run the following commands in two separate terminals to create a blissful development experience where your browser
 auto-refreshes when files change on your hard drive.
 
 ```
 
+./mvnw
 
-./gradlew -x webpack
 
 npm start
 ```
@@ -149,30 +129,16 @@ Note: There are still a few other things remaining to do for Leaflet that we won
 
 For further instructions on how to develop with JHipster, have a look at [Using JHipster in development][].
 
-### Doing API-First development using openapi-generator
-
-[OpenAPI-Generator]() is configured for this application. You can generate API code from the `src/main/resources/swagger/api.yml` definition file by running:
-
-```bash
-./gradlew openApiGenerate
-```
-
-Then implements the generated delegate classes with `@Service` classes.
-
-To edit the `api.yml` definition file, you can use a tool such as [Swagger-Editor](). Start a local instance of the swagger-editor using docker by running: `docker-compose -f src/main/docker/swagger-editor.yml up -d`. The editor will then be reachable at [http://localhost:7742](http://localhost:7742).
-
-Refer to [Doing API-First development][] for more details.
-
 ## Building for production
 
 ### Packaging as jar
 
-To build the final jar and optimize the noteynotenote application for production, run:
+To build the final jar and optimize the noteyboi application for production, run:
 
 ```
 
+./mvnw -Pprod clean verify
 
-./gradlew -Pprod clean bootJar
 
 ```
 
@@ -181,8 +147,8 @@ To ensure everything worked, run:
 
 ```
 
+java -jar target/*.jar
 
-java -jar build/libs/*.jar
 
 ```
 
@@ -196,8 +162,8 @@ To package your application as a war in order to deploy it to an application ser
 
 ```
 
+./mvnw -Pprod,war clean verify
 
-./gradlew -Pprod -Pwar clean bootWar
 
 ```
 
@@ -206,7 +172,7 @@ To package your application as a war in order to deploy it to an application ser
 To launch your application's tests, run:
 
 ```
-./gradlew test integrationTest jacocoTestReport
+./mvnw verify
 ```
 
 ### Client tests
@@ -227,12 +193,18 @@ Sonar is used to analyse code quality. You can start a local Sonar server (acces
 docker-compose -f src/main/docker/sonar.yml up -d
 ```
 
-You can run a Sonar analysis with using the [sonar-scanner](https://docs.sonarqube.org/display/SCAN/Analyzing+with+SonarQube+Scanner) or by using the gradle plugin.
+You can run a Sonar analysis with using the [sonar-scanner](https://docs.sonarqube.org/display/SCAN/Analyzing+with+SonarQube+Scanner) or by using the maven plugin.
 
 Then, run a Sonar analysis:
 
 ```
-./gradlew -Pprod clean check jacocoTestReport sonarqube
+./mvnw -Pprod clean verify sonar:sonar
+```
+
+If you need to re-run the Sonar phase, please be sure to specify at least the `initialize` phase since Sonar properties are loaded from the sonar-project.properties file.
+
+```
+./mvnw initialize sonar:sonar
 ```
 
 For more information, refer to the [Code quality page][].
@@ -257,7 +229,7 @@ You can also fully dockerize your application and all the services that it depen
 To achieve this, first build a docker image of your app by running:
 
 ```
-./gradlew bootJar -Pprod jibDockerBuild
+./mvnw -Pprod verify jib:dockerBuild
 ```
 
 Then run:
@@ -290,6 +262,3 @@ To configure CI for your project, run the ci-cd sub-generator (`jhipster ci-cd`)
 [protractor]: https://angular.github.io/protractor/
 [leaflet]: https://leafletjs.com/
 [definitelytyped]: https://definitelytyped.org/
-[openapi-generator]: https://openapi-generator.tech
-[swagger-editor]: https://editor.swagger.io
-[doing api-first development]: https://www.jhipster.tech/documentation-archive/v6.10.5/doing-api-first-development/

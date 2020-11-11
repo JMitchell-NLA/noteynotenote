@@ -1,11 +1,11 @@
 version: '2'
 services:
-  noteynotenote-postgresql:
+  noteyboi-postgresql:
     image: postgres:12.3
     # volumes:
-    #     - ~/volumes/jhipster/noteynotenote/postgresql/:/var/lib/postgresql/data/
+    #     - ~/volumes/jhipster/noteyboi/postgresql/:/var/lib/postgresql/data/
     environment:
-      - POSTGRES_USER=noteynotenote
+      - POSTGRES_USER=noteyboi
       - POSTGRES_PASSWORD=
       - POSTGRES_HOST_AUTH_METHOD=trust
     ports:

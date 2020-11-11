@@ -1,0 +1,37 @@
+{
+  "name": "Tag",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "tag",
+      "relationshipName": "assignedTo",
+      "otherEntityField": "login"
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "note",
+      "otherEntityRelationshipName": "tag",
+      "relationshipName": "note",
+      "otherEntityField": "id",
+      "ownerSide": false
+    }
+  ],
+  "changelogDate": "20201111055451",
+  "entityTableName": "tag",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": ["noteyboi"]
+}
