@@ -37,7 +37,6 @@ describe('Administration reducer tests', () => {
     expect(isEmpty(state.logs.loggers));
     expect(isEmpty(state.threadDump));
     expect(isEmpty(state.audits));
-    expect(isEmpty(state.tracker.activities));
   }
 
   function testMultipleTypes(types, payload, testFunction) {
@@ -182,38 +181,6 @@ describe('Administration reducer tests', () => {
         loading: false,
         audits: payload.data,
         totalItems: headers['x-total-count'],
-      });
-    });
-  });
-  describe('Websocket Message Handling', () => {
-    it('should update state according to a successful websocket message receipt', () => {
-      const payload = { id: 1, userLogin: username, page: 'home', sessionId: 'abc123' };
-      const toTest = administration(undefined, { type: ACTION_TYPES.WEBSOCKET_ACTIVITY_MESSAGE, payload });
-
-      expect(toTest).toMatchObject({
-        tracker: { activities: [payload] },
-      });
-    });
-
-    it('should update state according to a successful websocket message receipt - only one activity per session', () => {
-      const firstPayload = { id: 1, userLogin: username, page: 'home', sessionId: 'abc123' };
-      const secondPayload = { id: 1, userLogin: username, page: 'user-management', sessionId: 'abc123' };
-      const firstState = administration(undefined, { type: ACTION_TYPES.WEBSOCKET_ACTIVITY_MESSAGE, payload: firstPayload });
-      const secondState = administration(firstState, { type: ACTION_TYPES.WEBSOCKET_ACTIVITY_MESSAGE, payload: secondPayload });
-
-      expect(secondState).toMatchObject({
-        tracker: { activities: [secondPayload] },
-      });
-    });
-
-    it('should update state according to a successful websocket message receipt - remove logged out sessions', () => {
-      const firstPayload = { id: 1, userLogin: username, page: 'home', sessionId: 'abc123' };
-      const secondPayload = { id: 1, userLogin: username, page: 'logout', sessionId: 'abc123' };
-      const firstState = administration(undefined, { type: ACTION_TYPES.WEBSOCKET_ACTIVITY_MESSAGE, payload: firstPayload });
-      const secondState = administration(firstState, { type: ACTION_TYPES.WEBSOCKET_ACTIVITY_MESSAGE, payload: secondPayload });
-
-      expect(secondState).toMatchObject({
-        tracker: { activities: [] },
       });
     });
   });
